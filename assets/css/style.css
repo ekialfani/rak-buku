@@ -51,3 +51,85 @@ header {
 main {
 	margin-top: 150px;
 }
+
+
+.container {
+	max-width: 550px;
+	margin: 0 auto;
+	padding: 50px 30px 30px;
+	border-radius: 10px;
+	background-color: white;
+	box-shadow: 0 4px 6px -1px rgb(0,0,0,0.1), 0 2px 4px -2px rgb(0,0,0,0.1)
+}
+
+
+.add-book {
+	padding: 30px 20px 20px;
+	border: 2px solid #581C87;
+	border-radius: 10px;
+}
+
+.heading {
+	text-align: center;
+	margin-bottom: 20px;
+	color: #581C87;
+}
+
+.form label {
+	font-weight: bold;
+	color: #581C87;
+}
+
+.form input {
+	width: 100%;
+	padding: 10px;
+	margin-top: 5px;
+	margin-bottom: 20px;
+	font-size: 0.9em;
+	border: 1px solid #888;
+	border-radius: 5px;
+}
+
+.form input:focus {
+	outline-color: #581C87;
+}
+
+.form-completed {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.form-completed label {
+	margin-right: 5px;
+	font-weight: normal;
+	font-size: 15px;
+}
+
+
+.form-completed input {
+	width: 15px;
+	height: 15px;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+
+.form .btn-submit {
+	margin-bottom: 10px;
+	padding: 12px;
+	font-weight: bold;
+	background-color: #7E22CE;
+	color: white;
+}
+
+
+.btn-submit:hover {
+	background-color: #581C87;
+	cursor: pointer;
+}
+
+.btn-submit:active {
+	background-color: #7E22CE;
+}
