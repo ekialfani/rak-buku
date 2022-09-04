@@ -146,7 +146,7 @@ main {
 	border-radius: 10px;
 }
 
-.uncompleted-list {
+.book-list {
 	list-style: none;
 }
 
@@ -156,7 +156,13 @@ main {
 	padding: 20px;
 	border-radius: 10px;
 	line-height: 1.5;
+	margin-bottom: 20px;
 }
+
+.book-item:last-child {
+	margin-bottom: 0;
+}
+
 
 
 .book-item p {
