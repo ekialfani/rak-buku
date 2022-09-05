@@ -2,6 +2,44 @@ const bookList = [];
 const RENDER_EVENT = 'render-book';
 
 
+function findBook(bookId){
+	for(const book of bookList){
+		if(book.id === bookId){
+			return book;
+		}
+	}
+
+	return null;
+}
+
+
+function addBookToCompleted(bookId){
+	const targetBook = findBook(bookId);
+
+	if(targetBook === null) return;
+
+	// change isCompleted from false to true
+	targetBook.isCompleted = true;
+
+	document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+
+function undoBookFromCompleted(bookId){
+	// find book by id
+	const targetBook = findBook(bookId);
+	
+	// when the targetBook is empty
+	if(targetBook === null) return;
+
+	// change isCompleted from true to false
+	targetBook.isCompleted = false;
+
+	// run render-event to update bookList data
+	document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+
 function createBookItem(bookData){
 	const bookTitle = document.createElement('h3');
 	bookTitle.innerText = bookData.title;
@@ -16,6 +54,33 @@ function createBookItem(bookData){
 	container.classList.add('book-item');
 
 	container.append(bookTitle, author, published);
+
+	if(bookData.isCompleted){
+		// add an 'undo button' to container when 'isCompleted' is true
+		const undoButton = document.createElement('button');
+		undoButton.innerText = 'Belum Selesai';
+		undoButton.classList.add('undo-button');
+
+		// when 'undo button' is clicked
+		undoButton.addEventListener('click', function(){
+			undoBookFromCompleted(bookData.id);
+		})
+
+		container.append(undoButton);
+
+	}else {
+		// add a 'complete button' to container when 'isCompleted' is true
+		const completeButton = document.createElement('button');
+		completeButton.innerText = 'Selesai Dibaca';
+		completeButton.classList.add('complete-button');
+
+		// when 'complete button' is clicked
+		completeButton.addEventListener('click', function(){
+			addBookToCompleted(bookData.id);
+		})
+
+		container.append(completeButton);
+	}
 
 	return container;
 }

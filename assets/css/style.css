@@ -169,3 +169,42 @@ main {
 	color: #555;
 	font-size: 0.9em;
 }
+
+.complete-button, .undo-button {
+	padding: 10px 20px;
+	background-color: white;
+	border-radius: 5px;
+	font-weight: bold;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+.complete-button {
+	border: 2px solid #15803D;
+	color: #15803D;
+}
+
+.complete-button:hover {
+	background-color: #15803D;
+	color: white;
+}
+
+.complete-button:active {
+	background-color: white;
+	color: #15803D;
+}
+
+.undo-button {
+	border: 2px solid #6B21A8;
+	color: #6B21A8;
+}
+
+.undo-button:hover {
+	background-color: #6B21A8;
+	color: white;
+}
+
+.undo-button:active {
+	background-color: white;
+	color: #6B21A8;
+}
