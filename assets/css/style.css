@@ -29,7 +29,7 @@ header {
 	display: flex;
 	align-items: center;
 	border: 2px solid white;
-	border-radius: 5px;
+	border-radius: 10px;
 }
 
 .logo svg {
@@ -170,7 +170,9 @@ main {
 	font-size: 0.9em;
 }
 
-.complete-button, .undo-button {
+.complete-button,
+.undo-button,
+.delete-button {
 	padding: 10px 20px;
 	background-color: white;
 	border-radius: 5px;
@@ -207,4 +209,20 @@ main {
 .undo-button:active {
 	background-color: white;
 	color: #6B21A8;
+}
+
+.delete-button {
+	margin-left: 10px;
+	border: 2px solid #B91C1C;
+	color: #B91C1C;
+}
+
+.delete-button:hover {
+	background-color: #B91C1C;
+	color: white;
+}
+
+.delete-button:active {
+	background-color: white;
+	color: #B91C1C;
 }

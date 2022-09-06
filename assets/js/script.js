@@ -2,6 +2,16 @@ const bookList = [];
 const RENDER_EVENT = 'render-book';
 
 
+function findBookPosition(bookId){
+	for(const position in bookList){
+		if(bookList[position].id === bookId){
+			return position;
+		}
+	}
+
+	return -1;
+}
+
 function findBook(bookId){
 	for(const book of bookList){
 		if(book.id === bookId){
@@ -10,6 +20,18 @@ function findBook(bookId){
 	}
 
 	return null;
+}
+
+
+function deleteBookFromBookshelf(bookId){
+	// get book position
+	const bookPosition = findBookPosition(bookId);
+
+	// delete book data by index/position
+	bookList.splice(bookPosition, 1);
+
+	// run render-event to update bookList data
+	document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
 
@@ -66,7 +88,16 @@ function createBookItem(bookData){
 			undoBookFromCompleted(bookData.id);
 		})
 
-		container.append(undoButton);
+		const deleteButton = document.createElement('button');
+		deleteButton.innerText = 'Hapus Buku';
+		deleteButton.classList.add('delete-button');
+
+		// add a 'delete button' to delete book data
+		deleteButton.addEventListener('click', function(){
+			deleteBookFromBookshelf(bookData.id);
+		})
+
+		container.append(undoButton, deleteButton);
 
 	}else {
 		// add a 'complete button' to container when 'isCompleted' is true
@@ -79,7 +110,16 @@ function createBookItem(bookData){
 			addBookToCompleted(bookData.id);
 		})
 
-		container.append(completeButton);
+		// add a 'delete button' to delete book data
+		const deleteButton = document.createElement('button');
+		deleteButton.innerText = 'Hapus Buku';
+		deleteButton.classList.add('delete-button');
+
+		deleteButton.addEventListener('click', function(){
+			deleteBookFromBookshelf(bookData.id);
+		})
+
+		container.append(completeButton, deleteButton);
 	}
 
 	return container;
