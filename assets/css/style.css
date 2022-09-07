@@ -226,3 +226,132 @@ main {
 	background-color: white;
 	color: #B91C1C;
 }
+
+.popup-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.4);
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 999;
+}
+
+.popup-box {
+	width: 500px;
+	padding: 30px;
+	text-align: center;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 6px -1px rgb(0,0,0,0.1), 0 2px 4px -2px rgb(0,0,0,0.1);
+	opacity: 0;
+	transform: scale(0.8);
+}
+
+.popup-box h3 {
+	width: 80%;
+	margin: auto;
+	text-transform: capitalize;
+}
+
+.icon {
+	width: 50px;
+	height: 50px;
+	margin: 0 auto 20px;
+}
+
+.success-icon {
+	background: url('../icons/check-circle.svg');
+	background-size: contain;
+}
+
+.warning-icon {
+	background: url('../icons/exclamation-circle.svg');
+	background-size: contain;
+}
+
+.popup-box button {
+	width: 100px;
+	padding: 10px;
+	background-color: white;
+	margin-top: 20px;
+	border-radius: 5px;
+	font-weight: bold;
+	text-transform: capitalize;
+	cursor: pointer;
+}
+
+.cancel-button {
+	border: 2px solid #B91C1C;
+	margin-right: 10px;
+	color: #B91C1C;
+}
+
+.cancel-button:hover {
+	background-color: #B91C1C;
+	color: white;
+}
+
+.cancel-button:active {
+	background-color: white;
+	color: #B91C1C;
+}
+
+
+.confirm-button {
+	border: 2px solid #15803D;
+	color: #15803D;
+}
+
+.confirm-button:hover {
+	background-color: #15803D;
+	color: white;
+}
+
+.confirm-button:active {
+	background-color: white;
+	color: #15803D;
+}
+
+
+.content-show {
+	display: flex;
+}
+
+
+.animation-show {
+	animation: animShow .3s forwards;
+}
+
+.animation-hide {
+	animation: animHide .3s forwards;
+}
+
+
+@keyframes animShow {
+	0% {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes animHide {
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	100% {
+		opacity: 0;
+		transform: scale(0.8);
+	}
+}
+

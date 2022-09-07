@@ -35,6 +35,57 @@ function deleteBookFromBookshelf(bookId){
 }
 
 
+function confirmToDeleteBook(bookId){
+	const container = document.querySelector('.popup-container');
+	container.classList.add('content-show');
+
+	container.innerHTML = '';
+
+	const popupBox = document.createElement('div');
+	popupBox.classList.add('popup-box', 'animation-show');
+
+	const icon = document.createElement('div');
+	icon.classList.add('icon','warning-icon');
+
+	const messages = document.createElement('h3');
+	messages.innerText = 'apakah anda yakin ingin menghapus buku ini?';
+
+	const cancelButton = document.createElement('button');
+	cancelButton.innerText = 'batal';
+	cancelButton.classList.add('cancel-button');
+
+	cancelButton.addEventListener('click', function(){
+		popupBox.classList.replace('animation-show', 'animation-hide');
+
+		setTimeout(() => {
+			container.classList.remove('content-show');
+		}, 300);
+	})
+
+	const confirmButton = document.createElement('button');
+	confirmButton.innerText = 'ya';
+	confirmButton.classList.add('confirm-button');
+
+	confirmButton.addEventListener('click', function(){
+		icon.classList.replace('warning-icon', 'success-icon');
+		messages.innerText = 'buku berhasil dihapus';
+		popupBox.removeChild(cancelButton);
+		popupBox.removeChild(confirmButton);
+
+		setTimeout(() => {
+			container.classList.remove('content-show');
+		}, 1000)
+
+		deleteBookFromBookshelf(bookId);
+	})
+
+	popupBox.append(icon, messages, cancelButton, confirmButton);
+
+
+	container.append(popupBox);
+}
+
+
 function addBookToCompleted(bookId){
 	const targetBook = findBook(bookId);
 
@@ -94,7 +145,8 @@ function createBookItem(bookData){
 
 		// add a 'delete button' to delete book data
 		deleteButton.addEventListener('click', function(){
-			deleteBookFromBookshelf(bookData.id);
+			confirmToDeleteBook(bookData.id);
+
 		})
 
 		container.append(undoButton, deleteButton);
@@ -116,7 +168,7 @@ function createBookItem(bookData){
 		deleteButton.classList.add('delete-button');
 
 		deleteButton.addEventListener('click', function(){
-			deleteBookFromBookshelf(bookData.id);
+			confirmToDeleteBook(bookData.id);
 		})
 
 		container.append(completeButton, deleteButton);
