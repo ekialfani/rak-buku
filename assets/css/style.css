@@ -355,3 +355,41 @@ main {
 	}
 }
 
+
+/*responsive breakpoints*/
+/*mobile*/
+@media screen and (max-width: 480px){
+	.container {
+		width: 90%;
+		padding: 50px 20px 20px;
+	}
+
+	.uncompleted-bookshelf,
+	.completed-bookshelf {
+		padding: 10px;
+	}
+
+	.complete-button,
+	.undo-button,
+	.delete-button {
+		width: 100%;
+	}
+
+	.complete-button,
+	.undo-button {
+		margin-top: 50px;
+	}
+
+	.delete-button {
+		margin-left: 0;
+		margin-top: 10px;
+	}
+
+	.popup-box {
+		width: 90%;
+	}
+
+	.popup-box h3 {
+		width: 100%;
+	}
+}
