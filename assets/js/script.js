@@ -239,5 +239,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		e.preventDefault();
 
 		addNewBook();
+
+		addBookForm.reset();
+		window.scrollTo({
+			top: 613,
+			behavior: 'smooth'
+		})
 	})
 })
