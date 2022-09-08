@@ -2,6 +2,16 @@ const bookList = [];
 const RENDER_EVENT = 'render-book';
 
 
+function findBookPosition(bookId){
+	for(const position in bookList){
+		if(bookList[position].id === bookId){
+			return position;
+		}
+	}
+
+	return -1;
+}
+
 function findBook(bookId){
 	for(const book of bookList){
 		if(book.id === bookId){
@@ -10,6 +20,69 @@ function findBook(bookId){
 	}
 
 	return null;
+}
+
+
+function deleteBookFromBookshelf(bookId){
+	// get book position
+	const bookPosition = findBookPosition(bookId);
+
+	// delete book data by index/position
+	bookList.splice(bookPosition, 1);
+
+	// run render-event to update bookList data
+	document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+
+function confirmToDeleteBook(bookId){
+	const container = document.querySelector('.popup-container');
+	container.classList.add('content-show');
+
+	container.innerHTML = '';
+
+	const popupBox = document.createElement('div');
+	popupBox.classList.add('popup-box', 'animation-show');
+
+	const icon = document.createElement('div');
+	icon.classList.add('icon','warning-icon');
+
+	const messages = document.createElement('h3');
+	messages.innerText = 'apakah anda yakin ingin menghapus buku ini?';
+
+	const cancelButton = document.createElement('button');
+	cancelButton.innerText = 'batal';
+	cancelButton.classList.add('cancel-button');
+
+	cancelButton.addEventListener('click', function(){
+		popupBox.classList.replace('animation-show', 'animation-hide');
+
+		setTimeout(() => {
+			container.classList.remove('content-show');
+		}, 300);
+	})
+
+	const confirmButton = document.createElement('button');
+	confirmButton.innerText = 'ya';
+	confirmButton.classList.add('confirm-button');
+
+	confirmButton.addEventListener('click', function(){
+		icon.classList.replace('warning-icon', 'success-icon');
+		messages.innerText = 'buku berhasil dihapus';
+		popupBox.removeChild(cancelButton);
+		popupBox.removeChild(confirmButton);
+
+		setTimeout(() => {
+			container.classList.remove('content-show');
+		}, 1000)
+
+		deleteBookFromBookshelf(bookId);
+	})
+
+	popupBox.append(icon, messages, cancelButton, confirmButton);
+
+
+	container.append(popupBox);
 }
 
 
@@ -66,7 +139,17 @@ function createBookItem(bookData){
 			undoBookFromCompleted(bookData.id);
 		})
 
-		container.append(undoButton);
+		const deleteButton = document.createElement('button');
+		deleteButton.innerText = 'Hapus Buku';
+		deleteButton.classList.add('delete-button');
+
+		// add a 'delete button' to delete book data
+		deleteButton.addEventListener('click', function(){
+			confirmToDeleteBook(bookData.id);
+
+		})
+
+		container.append(undoButton, deleteButton);
 
 	}else {
 		// add a 'complete button' to container when 'isCompleted' is true
@@ -79,7 +162,16 @@ function createBookItem(bookData){
 			addBookToCompleted(bookData.id);
 		})
 
-		container.append(completeButton);
+		// add a 'delete button' to delete book data
+		const deleteButton = document.createElement('button');
+		deleteButton.innerText = 'Hapus Buku';
+		deleteButton.classList.add('delete-button');
+
+		deleteButton.addEventListener('click', function(){
+			confirmToDeleteBook(bookData.id);
+		})
+
+		container.append(completeButton, deleteButton);
 	}
 
 	return container;
@@ -147,5 +239,11 @@ document.addEventListener('DOMContentLoaded', function(){
 		e.preventDefault();
 
 		addNewBook();
+
+		addBookForm.reset();
+		window.scrollTo({
+			top: 613,
+			behavior: 'smooth'
+		})
 	})
 })
