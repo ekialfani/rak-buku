@@ -356,6 +356,25 @@ main {
 }
 
 
+.search-bar {
+	display: flex;
+	justify-content: end;
+	margin-bottom: 20px;
+}
+
+.search-bar input {
+	width: 50%;
+	font-size: 0.9em;
+	padding: 10px 20px;
+	border: 1px solid #581C87;
+	border-radius: 50px;
+}
+
+.search-bar input:focus {
+	outline-color: #581C87;
+}
+
+
 /*responsive breakpoints*/
 /*mobile*/
 @media screen and (max-width: 480px){
@@ -391,5 +410,9 @@ main {
 
 	.popup-box h3 {
 		width: 100%;
+	}
+
+	.search-bar input {
+		width: 70%;
 	}
 }

@@ -247,3 +247,35 @@ document.addEventListener('DOMContentLoaded', function(){
 		})
 	})
 })
+
+
+function searchBookByTitle(inputValue){
+	const completedBookList = document.getElementById('completed-list');
+	const uncompletedBookList = document.getElementById('uncompleted-list');
+	
+	completedBookList.innerHTML = '';
+	uncompletedBookList.innerHTML = '';
+
+	for(const book of bookList){
+		const bookTitle = book.title.toLowerCase();
+		if(bookTitle.indexOf(inputValue) !== -1){
+			const bookItem = createBookItem(book);
+
+			if(book.isCompleted){
+				completedBookList.append(bookItem);
+			}else {
+				uncompletedBookList.append(bookItem);
+			}
+		}
+	}
+}
+
+
+// search book by title
+const searchInput = document.getElementById('search-input');
+
+searchInput.addEventListener('input', function(e){
+	const inputValue = e.target.value.toLowerCase();
+
+	searchBookByTitle(inputValue);
+})
