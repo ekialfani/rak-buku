@@ -157,13 +157,16 @@ main {
 	border-radius: 10px;
 	line-height: 1.5;
 	margin-bottom: 20px;
+	position: relative;
 }
 
 .book-item:last-child {
 	margin-bottom: 0;
 }
 
-
+.book-item h3 {
+	width: 80%;
+}
 
 .book-item p {
 	color: #555;
@@ -225,6 +228,38 @@ main {
 .delete-button:active {
 	background-color: white;
 	color: #B91C1C;
+}
+
+.edit-button {
+	padding: 2px;
+	background-color: white;	
+	border: 2px solid #581C87;
+	border-radius: 3px;
+	color: #581C87;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.edit-button:hover {
+	background-color: #581C87;
+	color: white;
+	cursor: pointer;
+}
+
+.edit-button:active {
+	background-color: white;
+	color: #581C87;
+}
+
+.edit-button::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
 }
 
 .popup-container {
@@ -318,7 +353,7 @@ main {
 
 
 .content-show {
-	display: flex;
+	display: flex !important;
 }
 
 
@@ -375,6 +410,31 @@ main {
 }
 
 
+.edit-container {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999;
+	background-color: rgba(0, 0, 0, 0.5);
+	overflow: auto;
+}
+
+.edit-container .container {
+	width: 500px;
+	height: max-content;
+}
+
+
+.edit-book {
+	padding: 20px;
+	border: 2px solid #581C87;
+	border-radius: 10px;
+}
+
+
 /*responsive breakpoints*/
 /*mobile*/
 @media screen and (max-width: 480px){
@@ -414,5 +474,10 @@ main {
 
 	.search-bar input {
 		width: 70%;
+	}
+
+	.edit-container .container {
+		width: 90%;
+		margin: auto;
 	}
 }
