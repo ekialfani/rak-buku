@@ -1,6 +1,36 @@
 const bookList = [];
 const RENDER_EVENT = 'render-book';
+const BOOKSHELF_STORAGE = 'bookshelf-data';
 
+
+function checkForStorage(){
+	if(typeof(Storage !== undefined)){
+		return true;
+	}else {
+		alert('Browser doesn\'t support Web Storage');
+		return false;
+	}
+}
+
+function loadDataFromStorage(){
+	const bookData = JSON.parse(localStorage.getItem(BOOKSHELF_STORAGE));
+
+	if(bookData !== null){
+		for(const book of bookData){
+			bookList.push(book);
+		}
+	}
+
+	document.dispatchEvent(new Event(RENDER_EVENT));
+}
+
+function saveBookData(){
+	if(checkForStorage()){
+		const bookData = JSON.stringify(bookList);
+
+		localStorage.setItem(BOOKSHELF_STORAGE, bookData);
+	}
+}
 
 function findBookPosition(bookId){
 	for(const position in bookList){
@@ -52,6 +82,7 @@ function editBookData(bookData){
 		book.published = published;
 
 		document.dispatchEvent(new Event(RENDER_EVENT));
+		saveBookData();
 
 		editBook.classList.replace('animation-show', 'animation-hide');
 		setTimeout(() => {
@@ -72,6 +103,7 @@ function deleteBookFromBookshelf(bookId){
 
 	// run render-event to update bookList data
 	document.dispatchEvent(new Event(RENDER_EVENT));
+	saveBookData();
 }
 
 
@@ -135,6 +167,7 @@ function addBookToCompleted(bookId){
 	targetBook.isCompleted = true;
 
 	document.dispatchEvent(new Event(RENDER_EVENT));
+	saveBookData();
 }
 
 
@@ -150,6 +183,7 @@ function undoBookFromCompleted(bookId){
 
 	// run render-event to update bookList data
 	document.dispatchEvent(new Event(RENDER_EVENT));
+	saveBookData();
 }
 
 
@@ -281,6 +315,7 @@ function addNewBook(){
 
 	bookList.push(bookData);
 	document.dispatchEvent(new Event(RENDER_EVENT));
+	saveBookData();
 }
 
 
@@ -298,6 +333,10 @@ document.addEventListener('DOMContentLoaded', function(){
 			behavior: 'smooth'
 		})
 	})
+
+	if(checkForStorage()){
+		loadDataFromStorage();
+	}
 })
 
 
